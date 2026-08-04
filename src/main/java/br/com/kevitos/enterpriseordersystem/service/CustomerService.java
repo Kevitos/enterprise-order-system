@@ -35,4 +35,9 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
+    public Customer getCustomerById(Long id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found."));
+    }
+
 }
