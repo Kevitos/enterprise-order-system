@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.kevitos.enterpriseordersystem.repository.CustomerRepository;
 import java.util.Optional;
-
+import br.com.kevitos.enterpriseordersystem.dto.CustomerResponse;
 import br.com.kevitos.enterpriseordersystem.dto.CreateCustomerRequest;
 import br.com.kevitos.enterpriseordersystem.entity.Customer;
 
@@ -17,7 +17,7 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public Customer createCustomer(CreateCustomerRequest request) {
+    public CustomerResponse createCustomer(CreateCustomerRequest request) {
 
         Optional<Customer> existingCustomer = customerRepository.findByEmailOrDocument(
                 request.email(),
@@ -32,7 +32,13 @@ public class CustomerService {
                 request.email(),
                 request.document());
 
-        return customerRepository.save(customer);
+        Customer savedCustomer = customerRepository.save(customer);
+        return new CustomerResponse(
+                savedCustomer.getId(),
+                savedCustomer.getName(),
+                savedCustomer.getEmail(),
+                savedCustomer.getDocument(),
+                savedCustomer.getCreatedAt());
     }
 
     public Customer getCustomerById(Long id) {

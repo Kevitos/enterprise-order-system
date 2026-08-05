@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.kevitos.enterpriseordersystem.dto.CreateCustomerRequest;
+import br.com.kevitos.enterpriseordersystem.dto.CustomerResponse;
 import br.com.kevitos.enterpriseordersystem.entity.Customer;
 import br.com.kevitos.enterpriseordersystem.service.CustomerService;
 
@@ -21,10 +22,10 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping
-    public Customer create(@RequestBody CreateCustomerRequest request) {
-        return customerService.createCustomer(request);
-    }
+@PostMapping
+public CustomerResponse create(@RequestBody CreateCustomerRequest request) {
+    return customerService.createCustomer(request);
+}
 
     @GetMapping("/{id}")
     public Customer buscar(@PathVariable Long id) {
