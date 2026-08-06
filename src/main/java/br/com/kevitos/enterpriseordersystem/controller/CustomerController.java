@@ -11,7 +11,9 @@ import br.com.kevitos.enterpriseordersystem.dto.CreateCustomerRequest;
 import br.com.kevitos.enterpriseordersystem.dto.CustomerResponse;
 import br.com.kevitos.enterpriseordersystem.entity.Customer;
 import br.com.kevitos.enterpriseordersystem.service.CustomerService;
+import jakarta.validation.Valid;
 
+@Valid
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
@@ -23,7 +25,9 @@ public class CustomerController {
     }
 
 @PostMapping
-public CustomerResponse create(@RequestBody CreateCustomerRequest request) {
+public CustomerResponse create(
+        @Valid @RequestBody CreateCustomerRequest request) {
+
     return customerService.createCustomer(request);
 }
 
