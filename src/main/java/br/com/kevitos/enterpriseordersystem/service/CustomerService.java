@@ -7,6 +7,7 @@ import java.util.Optional;
 import br.com.kevitos.enterpriseordersystem.dto.CustomerResponse;
 import br.com.kevitos.enterpriseordersystem.dto.CreateCustomerRequest;
 import br.com.kevitos.enterpriseordersystem.entity.Customer;
+import br.com.kevitos.enterpriseordersystem.exception.CustomerNotFoundException;
 
 @Service
 public class CustomerService {
@@ -24,7 +25,7 @@ public class CustomerService {
                 request.document());
 
         if (existingCustomer.isPresent()) {
-            throw new IllegalArgumentException("Customer already exists.");
+           throw new CustomerNotFoundException("Customer not found.");
         }
 
         Customer customer = new Customer(
